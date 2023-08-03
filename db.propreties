@@ -1,4 +1,4 @@
 user=postgres
-password=12345678
+password=
 dburl=jdbc:postgresql://localhost:5432/funcionarios
 useSSL=false
