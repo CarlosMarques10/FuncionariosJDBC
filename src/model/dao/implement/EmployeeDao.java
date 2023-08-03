@@ -12,15 +12,15 @@ import java.util.Map;
 
 import db.DB;
 import db.excpetions.DbException;
-import model.dao.EmployeeDao;
+import model.dao.GenericDao;
 import model.entities.Department;
 import model.entities.Employee;
 
-public class EmployeeDaoJDBC implements EmployeeDao{
+public class EmployeeDao implements GenericDao<Employee>{
 
 	private Connection conn;
 	
-	public EmployeeDaoJDBC(Connection conn) {
+	public EmployeeDao(Connection conn) {
 		this.conn = conn;
 	}
 	

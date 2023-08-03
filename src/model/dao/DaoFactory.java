@@ -1,12 +1,12 @@
 package model.dao;
 
 import db.DB;
-import model.dao.implement.EmployeeDaoJDBC;
+import model.dao.implement.EmployeeDao;
 
 public class DaoFactory {
 	
-	public static EmployeeDaoJDBC createEmployeeDao() {
-		return new EmployeeDaoJDBC(DB.getConnection());
+	public static EmployeeDao createEmployeeDao() {
+		return new EmployeeDao(DB.getConnection());
 	}
 
 }
