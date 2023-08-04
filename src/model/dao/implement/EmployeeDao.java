@@ -68,13 +68,14 @@ public class EmployeeDao implements GenericDao<Employee>{
 		
 		try {
 			st = conn.prepareStatement(
-					"UPDATE employees SET name = ?, tel = ?, birthDate = ?, salary = ?, id_department = ?");
+					"UPDATE employees SET name = ?, tel = ?, birthDate = ?, salary = ?, id_department = ? WHERE id = ?");
 			
 			st.setString(1, obj.getName());
 			st.setString(2, obj.getTel());
 			st.setDate(3, new java.sql.Date(obj.getBirthDate().getTime()));
 			st.setDouble(4, obj.getSalary());
 			st.setInt(5, obj.getDepartment().getId());
+			st.setInt(6, obj.getId());
 			
 			st.executeUpdate();
 			
@@ -108,13 +109,14 @@ public class EmployeeDao implements GenericDao<Employee>{
 	public Employee procurarPeloId(Integer id) {
 		
 		PreparedStatement st = null;
+		ResultSet rs = null;
 		
 		try {
 			st = conn.prepareStatement("SELECT * FROM employees WHERE id = ?");
 			
 			st.setInt(1, id);
 			
-			ResultSet rs = st.executeQuery();
+			rs = st.executeQuery();
 			
 			if(rs.next()) {
 				Department dep = instanciaDepartment(rs);
@@ -128,7 +130,7 @@ public class EmployeeDao implements GenericDao<Employee>{
 			throw new DbException(e.getMessage());
 		} finally {
 			DB.closeStatement(st);
-			DB.closeResultSet(null);
+			DB.closeResultSet(rs);
 		}
 	}
 
