@@ -32,14 +32,13 @@ public class EmployeeDao implements GenericDao<Employee>{
 		
 		try {
 			st = conn.prepareStatement(
-					"INSERT INTO employees (name,tel,birthDate,salary,id_department) VALUES (?,?,?,?,?)", 
+					"INSERT INTO employees (name,tel,salary,id_department) VALUES (?,?,?,?)", 
 					Statement.RETURN_GENERATED_KEYS);
 			
 			st.setString(1, obj.getName());
 			st.setString(2, obj.getTel());
-			st.setDate(3, new java.sql.Date(obj.getBirthDate().getTime()));
-			st.setDouble(4, obj.getSalary());
-			st.setInt(5, obj.getDepartment().getId());
+			st.setDouble(3, obj.getSalary());
+			st.setInt(4, obj.getDepartment().getId());
 			
 			int rowsAffected = st.executeUpdate();
 			
@@ -72,7 +71,6 @@ public class EmployeeDao implements GenericDao<Employee>{
 			
 			st.setString(1, obj.getName());
 			st.setString(2, obj.getTel());
-			st.setDate(3, new java.sql.Date(obj.getBirthDate().getTime()));
 			st.setDouble(4, obj.getSalary());
 			st.setInt(5, obj.getDepartment().getId());
 			st.setInt(6, obj.getId());
@@ -168,7 +166,6 @@ public class EmployeeDao implements GenericDao<Employee>{
 		}
 	}
 
-	@Override
 	public List<Employee> procurarPeloDepartamento(Department department) {
 		
 		PreparedStatement st = null;
@@ -217,7 +214,6 @@ public class EmployeeDao implements GenericDao<Employee>{
 		emp.setId(rs.getInt("id"));
 		emp.setName(rs.getString("name"));
 		emp.setTel(rs.getString("tel"));
-		emp.setBirthDate(rs.getDate("birthDate"));
 		emp.setSalary(rs.getDouble("salary"));
 		emp.setDepartment(dep);
 		return emp;

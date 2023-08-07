@@ -152,9 +152,32 @@ public class DepartmentDao implements GenericDao<Department>{
 		}
 	}
 
-	@Override
-	public List<Department> procurarPeloDepartamento(Department department) {
-		return null;
+
+	public Department procurarPeloDepartamento(String departamento) {
+		
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		
+		try {
+			st = conn.prepareStatement("SELECT * from departments WHERE name = ?");
+			st.setString(1, departamento);
+			rs = st.executeQuery();
+			
+			if(rs.next()) {
+				Department dep = new Department();
+				dep.setId(rs.getInt("id"));
+				dep.setName(rs.getString("name"));
+				return dep;
+			}
+			return null;
+			
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+		
 	}
 	
 	

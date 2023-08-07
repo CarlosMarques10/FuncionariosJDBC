@@ -1,7 +1,6 @@
 package model.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
 
 public class Employee implements Serializable{
@@ -11,17 +10,14 @@ public class Employee implements Serializable{
 	private Integer id;
 	private String name;
 	private String tel;
-	private Date birthDate;
 	private Double salary;
 	private Department department;
 	
 	public Employee() {}
 
-	public Employee(Integer id, String name, String tel, Date birthDate, Double salary, Department department) {
-		this.id = id;
+	public Employee(String name, String tel, Double salary, Department department) {
 		this.name = name;
 		this.tel = tel;
-		this.birthDate = birthDate;
 		this.salary = salary;
 		this.department = department;
 	}
@@ -50,13 +46,6 @@ public class Employee implements Serializable{
 		this.tel = tel;
 	}
 
-	public Date getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
 
 	public Double getSalary() {
 		return salary;
@@ -74,11 +63,21 @@ public class Employee implements Serializable{
 		this.department = department;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", tel=" + tel + ", birthDate=" + birthDate + ", salary="
-				+ salary + ", department=" + department + "]";
+	    StringBuilder sb = new StringBuilder();
+	    sb.append("Nome: ").append(getName());
+	    sb.append(", Tel: ").append(getTel());
+	    sb.append(", Salario: R$ ").append(getSalary());
+	    if (department != null) {
+	        sb.append(", ID do departamento: ").append(department.getId());
+	    } else {
+	        sb.append(", Departamento não atribuído");
+	    }
+	    return sb.toString();
 	}
+	
 
 	@Override
 	public int hashCode() {

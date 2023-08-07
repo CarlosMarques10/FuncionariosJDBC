@@ -1,8 +1,6 @@
 package model.dao;
 
 import java.util.List;
-import model.entities.Department;
-
 
 public interface GenericDao <T>{
 	
@@ -11,5 +9,4 @@ public interface GenericDao <T>{
 	void deletarPeloId(Integer id);
 	T procurarPeloId(Integer id);
 	List<T> procurarTudo();
-	List<T> procurarPeloDepartamento(Department department);
 }
